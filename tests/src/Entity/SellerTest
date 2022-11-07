@@ -1,0 +1,38 @@
+<?php
+
+namespace tests\src\Entity;
+ 
+use App\Entity\Seller;
+use DateTime;
+use PHPUnit\Framework\TestCase;
+ 
+class SellerTest extends TestCase{
+
+    private $seller;
+
+    protected function setUp(): void
+    {
+        $this->seller = new Seller();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->seller = null;
+    }
+
+
+    public function testThatValuesCanBeCorrectlySet(): void
+    {
+        $this->seller->setFirstName("Hans");
+        $this->seller->setLastName("Müller");
+        $this->seller->setDateJoined(DateTime::createFromFormat(format:"Y-m-d", datetime: "2018-08-17"));
+
+
+
+        $this->assertTrue($this->seller->getDateJoined()->format("w") === 17);
+        $this->assertTrue($this->seller->getDateJoined()->format("n") === 8);
+        $this->assertTrue($this->seller->getDateJoined()->format("y") === 2018);
+        $this->assertTrue($this->seller->getLastName() === "Müller");
+        $this->assertTrue($this->seller->getFirstName() === "Hans");
+    }
+}
